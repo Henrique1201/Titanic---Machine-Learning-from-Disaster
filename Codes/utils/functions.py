@@ -5,6 +5,17 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, average_precision_score, precision_score
 from sklearn.preprocessing import OneHotEncoder
 
+params_for_GS = {
+    'n_estimators': [100, 200, 300],
+    'max_depth': [None, 10, 20, 30],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4],
+    'bootstrap': [True, False],
+    'max_features': ['auto', 'sqrt', 'log2'],
+    'criterion': ['gini', 'entropy']
+}
+
+
 def pre_processing(df):
     
     
@@ -28,6 +39,8 @@ def pre_processing(df):
     if 'Survived' in df.columns:
         survived = df.pop('Survived')
         df['Survived'] = survived
+
+    df = df.set_index('PassengerId')
         
     return df
 
